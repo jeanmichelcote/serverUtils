@@ -1,2 +1,2 @@
 #!/bin/sh
-echo "${HOME}"
+[ ! -d "${HOME}/tmp" ] && mkdir "${HOME}/tmp"
