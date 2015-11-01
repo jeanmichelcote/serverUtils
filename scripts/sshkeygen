@@ -1,0 +1,77 @@
+#!/bin/bash   
+#  
+#- Credentials:
+#-    
+#- Title            sshkeygen
+#- Creation date    07-17-2015
+#- Author           Jean Michel Cote
+#- Github           https://github.com/jeanmichelcote/scripts/
+#- Version          1.0
+# 
+#: Usage:           sshkeygen [Options] <arguments>
+#:                  
+#: Description:     Checks if a local private/public ssh key is present, 
+#:                  - if not, asks for you credentials and creates it.
+#:                  Then it copies your public key to a remote server of 
+#:                  your choosing and finally creates an alias for instant 
+#:                  passwordless connection.
+#: 
+#: [Options]:   -h  Prints out this usage block.
+#:              -v  Prints out the credentials.
+#:                            
+#: <Arguments>:     Accepts 3 arguments.
+#:                  Enclose in double quotes when typing more than one word.
+#:      
+#:                  $1 = Name of the alias to be created
+#:                  $2 = Remote server's user name
+#:                  $3 = Remote server's host name
+#:  
+#: (example):       sshkeygen abe lincoln president.com
+#:                 
+
+source ~/.functions
+
+usage=$( grep "^#: " "$0" )
+creds=$( grep "^#- " "$0" )
+
+# Any good reason to exit?
+while getopts ":hv" opt; do
+  case $opt in
+    h) echo "$usage" | cut -c 4- 1>&2 && exit 0    ;;
+    v) echo "$creds" | cut -c 4- 1>&2 && exit 0    ;;
+    *) echo "$usage" | cut -c 4- 1>&2 && exit 1    ;;
+  esac
+done
+shift $(( OPTIND - 1))
+
+[[ "$#" -ne 3 ]] && echo "$usage" && exit 1
+
+# EDITABLES ###########################
+dest="${HOME}/.ssh/config"            # where to store the alias
+# END EDITABLES #######################
+                      
+## Checks if a .ssh directory already exists
+if [[ ! -d "${HOME}/.ssh" ]]; then
+	msg_notice "Ssh key created in ${HOME}/${USER}/.ssh"
+	ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+	msg_success "Success"
+fi
+
+cat "${HOME}"/.ssh/id_rsa.pub | ssh "${2}@${3}" "mkdir -p ~/.ssh && cat >>  ~/.ssh/authorized_keys"
+[[ "$?" -eq 0 ]] && msg_success "ssh key uploaded to [ ${2}@${3}:~/.ssh/authorized_keys$ ]"
+
+cat - "${dest}" > "${dest}.new" <<EOF
+Host $1
+    Hostname $3
+    user $2
+    IdentityFile ~/.ssh/id_rsa
+EOF
+
+bail "Script could not execute properly. Could not copy Heredoc."
+
+# Creates new ssh config entry and prepend it to /Users/jeanmichecote/.ssh/config file
+msg_info "Ssh alias ${1} created in ${dest}"
+
+mv "${dest}" "${dest}.bak" && mv "${dest}.new" "${dest}"
+
+#newalias "$1" "\"ssh ${2}@${3}\"" ".aliases"

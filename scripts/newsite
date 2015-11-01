@@ -1,0 +1,93 @@
+#!/bin/bash          
+############################################################################# 
+#- Name             newsite
+#- Creation date    09-10-2015
+#- Author           Jean Michel Cote
+#- Github           https://github.com/jeanmichelcote/scripts/
+#- Version          1.0
+############################################################################# 
+# 
+#: Usage:           newsite [Options] <arguments>
+#: 
+#: Description:     Initiates the git deployment of any local directory  
+#:                  to a remote server as a git repo.
+#:      
+#: [Options]:   -h  Prints out this usage block.
+#:              -c  Prints out the credentials.
+#: 
+#: <Arguments>:     Accepts 1 arguments.
+#:              $1  Name of the new site 
+#: 
+#: (example):       newsite validate "Validates any entry against all 
+#:                  sorts of data types" -e email -t telephone -z zipcode
+#:                 
+############################################################################# 
+                 
+source ~/.functions 
+
+[[ "$#" -eq 0 ]] && printusage -H >&2 && exit 1
+
+while getopts ":hc" opt; do
+  case $opt in
+    h) printusage -H && exit 0      ;;
+    c) printusage -C && exit 0      ;; 
+    *) printusage -H >&2 && exit 1  ;;
+  esac
+done
+shift $(( OPTIND - 1 ))
+
+# Checks if the current directory is already a git repo
+shopt -s dotglob
+for f in ./*; do
+  if [[ "${f##*/}" == ".git" ]]; then
+    msg_alert "The current directory is already a git repo."
+  fi
+done
+
+# EDITABLES #########################################################
+remoteServer="jmdevel@spiraliens.net"                               #
+remoteGitRepo="${remoteServer}/~/devel.jeanmichelcote.com/gitRepo"  #
+onlineDevSite="http://devel.jeanmichelcote.com"                     #
+gitUser="Jeanmichel Cote"                                           #
+gitEmail="webdev@jeanmichelcote.com"                                #
+# END EDITABLES #####################################################
+
+dirtyName="$1"
+# Stripped from whitespace and lowercased
+name=$( echo "${dirtyName// /-}" | tr '[:upper:]' '[:lower:]' ) 
+
+msg_notice "Initializing git repo."
+git init
+
+# Fill in git config file
+cat <<EOF > ".git/config"
+[core]
+  repositoryformatversion = 0
+  filemode = true
+  bare = false
+  logallrefupdates = true
+  ignorecase = true
+  precomposeunicode = true
+[remote "origin"]
+  url = ssh://${remoteGitRepo}/${name}.git
+  fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+  remote = origin
+  merge = refs/heads/master
+[user]
+  email = $gitEmail
+  name = $gitUser
+EOF
+
+git add .
+git commit -a -m "Initial commit"
+
+# Create the git repo on server
+msg_notice "Logging in ${remoteServer}..."
+ssh $remoteServer "sh init_new_site.sh ${name}"
+
+msg_notice "Git push to the server"
+git push origin master
+
+msg_notice "Done baby"
+msg_notice "Visit ${onlineDevSite}/${name}"
