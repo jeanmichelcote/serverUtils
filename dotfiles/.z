@@ -22,6 +22,7 @@
 /usr/bin|6|1442154772
 /usr/local/src/lynx2-8-7|5|1433426525
 /Users/jeanmichecote/Documents/WEB_clients/perso/public/meteor/simple-todos|13|1436236797
+/Users/jeanmichecote/github/serverutils/.git|13|1446395686
 /Users/jeanmichecote/Documents/WEB_clients/perso/public/yeoman/meteor/.meteor/local/build/programs/web.browser/app|3|1441419537
 /Users/jeanmichecote/Documents/WEB_clients/perso/public/DEVEL|79|1446212904
 /Users/jeanmichecote/Library/Application Support/debops/debops-playbooks|2|1435452573
@@ -46,7 +47,6 @@
 /Users/jeanmichecote/Documents/WEB_clients/perso/public/fugitive/test/_public|2|1433004837
 /Users/jeanmichecote/src/crashpad/crashpad/tools|7|1438222185
 /usr/local/etc/ansible/roles/jyunderwood.nodejs|2|1435421731
-/Users/jeanmichecote/github/dotfiles/.git|3|1436963889
 /Users/jeanmichecote/desktop|17|1442878266
 /private/etc/postfix|12|1442069641
 /Users/jeanmichecote/.vim/bundle/syntastic/plugin|2|1441509233
@@ -79,7 +79,6 @@
 /Users/jeanmichecote/src/crashpad/crashpad/client|2|1438222006
 /Users/jeanmichecote/.vim/bundle|7|1441509237
 /Users/jeanmichecote/src/crashpad/crashpad/compat/mac/sys|2|1438222025
-/Users/jeanmichecote/github/scripts|278|1446338674
 /Users/jeanmichecote/bin/lib|19|1444619298
 /Users/jeanmichecote/.vim/colors|4|1441504628
 /Users/jeanmichecote/Documents/WEB_clients/perso/public/DEVEL/err|1|1442235158
@@ -107,18 +106,18 @@
 /Users/jeanmichecote/.password-store/Dreamhost|2|1434302421
 /Volumes|8|1442191073
 /dev|5|1444965075
+/Users/jeanmichecote/tmp/test|7|1446395441
 /Users/jeanmichecote/Documents|5|1446212885
 /Users/jeanmichecote/Desktop|113|1441890790
 /private/etc/apache2/auth|2|1438203666
 /Users/jeanmichecote/Documents/WEB_clients/perso/public/debops|2|1435452662
 /Users/jeanmichecote/Documents/WEB_clients/depalma/vagrant-local/www|6|1429045985
-/Users/jeanmichecote/github|216|1446393703
+/Users/jeanmichecote/github|239|1446394849
 /Users/jeanmichecote/Documents/WEB_clients/perso/public/yeoman/meteor/.meteor/local/shell|2|1441419439
 /Users/jeanmichecote/Downloads/libbash-0.9.11|7|1444400352
 /Users/jeanmichecote/Documents/WEB_clients/perso/public/meteor/devsite|28|1436040292
 /Users/jeanmichecote/Documents/WEB_clients/perso/public/yeoman/meteor/.meteor/local/build/programs/server/npm/meteor|2|1441419481
 /Users/jeanmichecote/src/crashpad/crashpad/util/mac|2|1438222198
-/Users/jeanmichecote/github/scripts/.git|15|1446316456
 /Users/jeanmichecote/src/depot_tools|5|1438178160
 /Users/jeanmichecote/src/crashpad/crashpad/util/file|2|1438222194
 /Users/jeanmichecote/Documents/WEB_clients/perso/public/DEVEL/jeanmichelcote/.git|39|1446223241
@@ -158,10 +157,10 @@
 /Users/jeanmichecote/Documents/WEB_clients/7doigts/dev/7doigts.com/app|2|1430703827
 /usr/local/lib/node_modules/electron/lib/electron|2|1438972201
 /Users/jeanmichecote/src/crashpad/crashpad/tools/mac|2|1438222082
+/Users/jeanmichecote/tmp|578|1446395353
 /usr/local/lib/node_modules/electron-packager/node_modules|2|1438972490
 /System/Library/StartupItems/dreamcompute|7|1446338303
-/Users/jeanmichecote/tmp|577|1446385956
-/Users/jeanmichecote/tmp/rsyncTests|95|1446386508
+/Users/jeanmichecote/tmp/rsyncTests|96|1446395349
 /Users/jeanmichecote/Applications|4|1438972007
 /Users/jeanmichecote/Documents/WEB_clients/perso/public/yeoman/meteor/.meteor/local/build/programs|6|1441419544
 /usr/local/Library/ENV/4.3|14|1442408236
@@ -172,6 +171,7 @@
 /opt|5|1446332461
 /Users/jeanmichecote/Documents/WEB_clients/perso/public/yeoman/meteor/.meteor/local/build/programs/web.browser|4|1441419538
 /Users/jeanmichecote/bin/log4sh-1.4.2/share/dist|2|1443833036
+/Users/jeanmichecote/github/serverutils|12|1446395083
 /sw/bin|4|1442165109
 /System/Library/StartupItems|7|1446332606
 /private/etc/apache2|19|1438203668
@@ -204,8 +204,6 @@
 /Users/jeanmichecote/dotfiles/.vim|20|1441507601
 /Volumes/poche/perso|2|1442191085
 /Users/jeanmichecote/Documents/WEB_clients/perso/public/meteor/test|13|1436915081
-/Users/jeanmichecote/github/serverUtils|226|1443316204
-/Users/jeanmichecote/github/.git|9|1446393659
 /private/etc/apache2/original|3|1438203653
 /Users/jeanmichecote/Documents/WEB_clients/perso/public/rails/railsAngular_tut|15|1441897736
 /usr/share/man/man1|16|1442164822
@@ -254,7 +252,6 @@
 /Users/jeanmichecote/Library/Sounds|7|1436324430
 /Users/jeanmichecote/src/crashpad/crashpad/doc|2|1438222031
 /Users/jeanmichecote/.password-store|3|1434302418
-/Users/jeanmichecote/github/dotfiles|36|1446314437
 /Users/jeanmichecote/Documents/WEB_clients/perso/public/yeoman/meteor/.meteor/local/isopacks|2|1441419444
 /Users/jeanmichecote/scenes|8|1441502427
 /Users/jeanmichecote/Documents/WEB_clients/perso/devsites/healthIntakes|17|1436834411
