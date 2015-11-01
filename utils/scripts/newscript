@@ -1,0 +1,104 @@
+#!/bin/bash   
+#     
+#- Name             newscript
+#- Creation date    07-17-2015
+#- Author           Jean Michel Cote
+#- Github           https://github.com/jeanmichelcote/scripts/
+#- Version          1.0
+# 
+#: Usage:           newscript [Options] <arguments>
+#: 
+#: Description:     Creates a new script template with commented out usage 
+#:                  info at the top and basic logic, makes it executable and 
+#:                  saves it in your bin directory, which, if it doesn't 
+#:                  exist, is created.
+#:                  Relies on you to be crafted out to a finish, though...
+#:      
+#: [Options]:   -h  Prints out this usage block.
+#:              -v  Prints out the credentials.
+#: 
+#:                  Other than that, what you usually consider option flags 
+#:                  are, in fact, treated as arguments to this newscript 
+#:                  script but will be considered as true option flags 
+#:                  within the context of your newly created script.
+#: 
+#: <Arguments>:     Accepts a minimum of 2 arguments.
+#:                  Enclose in double quotes when typing more than one word.
+#:      
+#:              $1  Name of the new script
+#:              $2  Thorough description
+#:              $3  Options and arguments for your new script.
+#:                  Option flags must be entered first and then be followed
+#:                  by a space and a description for the flag.
+#:                  Simple arguments should be appended and separated by
+#:                  single spaces. 
+#: 
+#: (example):       newscript validate \
+#:                  "Validates any entry against all sorts of data types" \
+#:                  -e email -t telephone -z zipcode
+#:                  
+
+source ~/.functions
+
+if [[ "$#" -lt 2 ]]; then
+  while getopts ":hc" opt; do
+    case $opt in
+      h) printusage -H && exit 0      ;;
+      c) printusage -C && exit 0      ;;
+      *) printusage -H 1>&2 && exit 1 ;;
+    esac
+  done
+  shift $(( OPTIND - 1))
+fi
+
+# EDITABLES ################################
+dest="${HOME}/bin"                         # 
+# END EDITABLES ############################
+
+name=$1 
+desc=$2
+numOfArgs=$(( $#-2 ))
+date=$(date +%m-%d-%Y)                      
+
+# Makes sure the new script name isn't already used
+nameAlreadyUsed "$dest" "$name"
+
+# If destination directory does not exist, create it
+if [[ ! -d "${dest}" ]]; then 
+  msg_info "Creating ${dest} directory..."
+  sleep 1.5
+  mkdir "${dest}" 
+fi
+
+# Gets our new scripts's parameters in
+argarr=()
+for arg in "${@:3}"; do
+  argarr=("${argarr[@]}" "$arg")
+done
+
+# Templating...
+cat <<EOF > "${dest}/${name}"
+#!/bin/bash
+$( usageblock "$name" "$desc" "${argarr[@]}" )
+
+source ${HOME}/.functions
+
+while getopts ":hc" opt; do
+  case \$opt in
+    h) printusage -H && exit 0      ;;
+    c) printusage -C && exit 0      ;;
+    *) printusage -H >&2 && exit 1  ;;
+  esac
+done
+shift \$(( OPTIND - 1))
+
+[[ \$# -ne ${numOfArgs} ]] && printusage -H >&2 && return 1
+
+# EDITABLES ######################
+myVariable="myValue"             #
+# END EDITABLES ##################
+
+EOF
+
+chmod +x "${dest}/${name}"
+$EDITOR "${dest}/${name}"

@@ -1,0 +1,57 @@
+#!/bin/bash          
+#
+#- Title            newalias
+#- Creation date    07-30-2015
+#- Author           Jean Michel Cote
+#- Github           https://github.com/jeanmichelcote/scripts/
+#- Version          1.0
+# 
+#: Usage:           newalias [Options] <arguments>
+#:                  
+#: Description:     This basically creates a newalias and append it
+#:                  in a local aliases file of your choosing.
+#: 
+#: [Options]:   -h  Prints out this usage block.
+#:              -v  Prints out the credentials.
+#:                            
+#: <Arguments>:     Accepts 3 arguments.
+#:                  Enclose in double quotes when typing more than one word.
+#:      
+#:              $1  Name of the alias to be created
+#:              $2  Actual command to be aliased.
+#:              $3  Target destination file (usually, a .dotfile)
+#:  
+#: (example):       newalias paths "echo -e ${PATH//:/\\n}" .bash_aliases
+#:                 
+
+source ~/.functions
+
+while getopts ":hc" opt; do
+  case $opt in
+    h) printusage -H && exit 0        ;;
+    c) printusage -C && exit 0        ;;
+    *) printusage -H >&2 && exit 1    ;;
+  esac
+done
+shift $(( OPTIND - 1))
+
+[[ "$#" -ne 3 ]] && printusage -H >&2 && exit 1
+
+name="$1"
+cmnd="$2"
+dest="${HOME}/${3}"
+
+# If alias name is already used
+grep -w "$name" "$dest" &>/dev/null 2>&1
+bail -v "This alias name is already in use. Please choose another one."
+
+sed '/## Utilities/ a\ 
+\alias '"$name"'="'"$cmnd"'"
+' "${dest}" > "${dest}.new" && \
+mv "$dest" "${dest}.bak" && \
+mv "${dest}.new" "$dest" && \
+rm "${dest}.bak"
+
+msg_notice "Alias '${name}=${cmnd}' created in $dest"
+
+source "$dest"
