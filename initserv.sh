@@ -29,7 +29,7 @@ main() {
   git clone https://github.com/jeanmichelcote/serverutils.git .
   
   for dir in ./*/; do
-    #dir="${dir%*/}"
+    dir="${dir%*/}"
     #echo "${dir##*/}"
     echo $dir
   done
