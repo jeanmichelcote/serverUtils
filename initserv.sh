@@ -1,5 +1,8 @@
 #!/bin/sh
 mydir="${HOME}/tmp"
+imported=(dotfiles scripts)
+echo "${imported[@]}"
+exit 0
 [ ! -d "$mydir" ] && mkdir "$mydir"
 cd "$mydir"
 #git clone https://github.com/jeanmichelcote/serverutils.git .
