@@ -29,14 +29,15 @@ main() {
   git clone https://github.com/jeanmichelcote/serverutils.git .
   
   for dir in ./*/; do
+    dir="${dir%*/}"
+    echo "${dir##*/}"
     case $dir in
       "dotfiles") mv "${dir}/*" .   ;;
       "scripts" ) echo "yay"        ;;
     esac
 
     
-    #dir="${dir%*/}"
-    #echo "${dir##*/}"
+
   done
 
   # find . -maxdepth 1 -mindepth 1 -type d -printf '%f\n'
