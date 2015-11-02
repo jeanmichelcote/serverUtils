@@ -116,7 +116,7 @@ nameAlreadyUsed() {
 #- Version:             1.0    
 #
 #: Usage:               nameAlreadyUsed [OPTIONS] <arguments>
-#: Description:         Verifies is the name entered as second argument exists
+#: Description:         Verifies if the name entered as second argument exists
 #:                      in the directory path entered as first argument
 #: Options:             
 #:                 -h   Prints out this usage block
