@@ -29,8 +29,8 @@ main() {
 
   git clone https://github.com/jeanmichelcote/serverutils.git .
   
-  files="${mydir}/*"
-  echo "$files"
+  find . -maxdepth 1 -mindepth 1 -type d -printf '%f\n'
+
 #  for f in $files; do
 #     echo "Processing $f file..."
 #  done
