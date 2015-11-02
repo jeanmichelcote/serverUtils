@@ -33,7 +33,7 @@ main() {
     #echo "${dir##*/}"
     echo $dir
     case $dir in
-      "./dotfiles/") mv $dir/* .   ;;
+      "./dotfiles/") mv $dir* .   ;;
       "scripts" ) echo "yay"        ;;
     esac
 
