@@ -25,9 +25,9 @@ main() {
   mydir="${HOME}/tmp"
 
   [ ! -d "$mydir" ] && mkdir "$mydir"
-  #cd "$mydir"
+  cd "$mydir"
 
-  git clone https://github.com/jeanmichelcote/serverutils.git "$mydir"
+  git clone https://github.com/jeanmichelcote/serverutils.git .
   
 #  files=""
 #  for f in $files; do
