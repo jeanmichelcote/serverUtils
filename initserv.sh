@@ -6,7 +6,7 @@ cd "$mydir"
 
 #git clone https://github.com/jeanmichelcote/serverutils.git .
 
-files="${mydir}/dotfiles/*"
+files="$mydir"/dotfiles/*
 echo "$files"
 exit 0
 for f in $files; do
