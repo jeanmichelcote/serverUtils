@@ -29,8 +29,9 @@ main() {
   git clone https://github.com/jeanmichelcote/serverutils.git .
   
   for dir in ./*/; do
-    dir="${dir%*/}"
-    echo "${dir##*/}"
+    #dir="${dir%*/}"
+    #echo "${dir##*/}"
+    echo $dir
     case $dir in
       "dotfiles") mv "${dir}/*" .   ;;
       "scripts" ) echo "yay"        ;;
