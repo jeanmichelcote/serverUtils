@@ -1,5 +1,4 @@
-#!/bin/bash
-shopt -s dotglob
+#!/bin/sh
 
 nameAlreadyUsed() {
 #: Description:         Verifies if the name entered as second argument exists
@@ -20,7 +19,7 @@ nameAlreadyUsed() {
   dest="$1"
   name="$2"
 
-  [[ "$#" -ne 2 ]] && printusage -H >&2 && return 1
+  [ "$#" -ne 2 ] && printusage -H >&2 && return 1
 
   while getopts ":f" opt; do
     case $opt in
