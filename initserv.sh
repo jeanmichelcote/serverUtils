@@ -29,7 +29,8 @@ main() {
 
   git clone https://github.com/jeanmichelcote/serverutils.git .
   
-#  files=""
+  files="${mydir}/*"
+  echo "$files"
 #  for f in $files; do
 #     echo "Processing $f file..."
 #  done
