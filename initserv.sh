@@ -26,7 +26,7 @@ main() {
 
   [ ! -d "$mydir" ] && mkdir "$mydir"
   cd "$mydir"
-  git clone https://github.com/jeanmichelcote/serverutils.git .
+  #git clone https://github.com/jeanmichelcote/serverutils.git .
   
   for dir in ./*/; do
     #dir="${dir%*/}"
