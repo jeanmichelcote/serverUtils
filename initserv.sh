@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 nameAlreadyUsed() {
   #: Description:         Verifies if the name entered as second argument exists
