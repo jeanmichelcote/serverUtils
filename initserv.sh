@@ -32,13 +32,6 @@ main() {
     #dir="${dir%*/}"
     #echo "${dir##*/}"
     echo $dir
-    case $dir in
-      "./dotfiles/") mv $dir* .   ;;
-      "scripts" ) echo "yay"        ;;
-    esac
-
-    
-
   done
 
   # find . -maxdepth 1 -mindepth 1 -type d -printf '%f\n'
