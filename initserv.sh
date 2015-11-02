@@ -2,7 +2,7 @@
 mydir="${HOME}/tmp"
 [ ! -d "$mydir" ] && mkdir "$mydir"
 cd "$mydir"
-git clone https://github.com/jeanmichelcote/serverutils.git .
+#git clone https://github.com/jeanmichelcote/serverutils.git .
 
 files="${mydir}/dotfiles/*"
 for f in $files; do
