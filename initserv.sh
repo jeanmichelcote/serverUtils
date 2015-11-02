@@ -30,8 +30,7 @@ main() {
   
   for dir in ./*/; do
     dir="${dir%*/}"
-    #echo "${dir##*/}"
-    echo $dir
+    echo "${dir##*/}"
   done
 
   # find . -maxdepth 1 -mindepth 1 -type d -printf '%f\n'
