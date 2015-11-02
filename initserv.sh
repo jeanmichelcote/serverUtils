@@ -5,7 +5,7 @@ cd "$mydir"
 git clone https://github.com/jeanmichelcote/serverutils.git .
 
 files="${mydir}/dotfiles/*"
-for f in $files; do
+for f in "$files"; do
 	 echo "Processing $f file..."
 done
 
