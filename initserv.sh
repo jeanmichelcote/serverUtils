@@ -30,7 +30,7 @@ main() {
   
   for dir in ./*/; do
     #dir="${dir%*/}"
-    echo -n $dir*
+    printf "%s\n" $dir*
     #echo "${dir##*/}"
   done
 
