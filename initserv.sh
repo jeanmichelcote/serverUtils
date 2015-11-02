@@ -26,12 +26,17 @@ main() {
 
   [ ! -d "$mydir" ] && mkdir "$mydir"
   cd "$mydir"
-
   git clone https://github.com/jeanmichelcote/serverutils.git .
   
-  for dir in ./*; do
-    dir=${dir%*/}
-    echo ${dir##*/}
+  for dir in ./*/; do
+    case $dir in
+      "dotfiles") mv "${dir}/*" .   ;;
+      "scripts" ) echo "yay"        ;;
+    esac
+
+    
+    #dir="${dir%*/}"
+    #echo "${dir##*/}"
   done
 
   # find . -maxdepth 1 -mindepth 1 -type d -printf '%f\n'
