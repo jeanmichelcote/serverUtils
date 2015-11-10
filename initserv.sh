@@ -1,46 +1,41 @@
 #!/bin/bash
+shopt -s dotglob
 
-nameAlreadyUsed() {
-  #: Description:         Verifies if the name entered as second argument exists
-  #:                      in the directory path entered as first argument
-  #: Arguments:       
-  #:                 $1   Path to search
-  #:                 $2   Name to target
-  #: a
-  #: (exemple):           nameAlreadyUsed "path/to/dir/" "newname"
-  #:                      nameAlreadyUsed -f funcname
+localRepo="${HOME}/tmp/test2"
 
-  local dest name OPTIND
+tmp="${localRepo}/tmp"
+read -ra localFiles_a <<< $( find "$localRepo" ! -path "$localRepo"  -name '.*' -maxdepth 1 | awk '{print $0}' )
 
-  dest="$1"
-  name="$2"
+[[ ! -d "$tmp" ]] && mkdir -p "$tmp"
+cd "$tmp" &>/dev/null && git clone https://github.com/jeanmichelcote/serverutils.git .
 
-  if [ -f "${dest}/${name}" ]; then
-    # msg_alert "The name chosen for your new script is already used. Please choose another name."
-    exit 1
-  fi
-} 
+read -ra remoteDirs_a <<< $( find "$tmp" ! -path "$tmp" -type d -maxdepth 1 | awk '{print $0}' )
 
-main() {
-  mydir="${HOME}/tmp"
+for remdir in "${remoteDirs_a[@]}"; do
+  case ${remdir##*/} in
+    "scripts"   ) 
+                  cp -r "${remdir}" "${localRepo}/bin"  
+                ;;
+    ".git"      ) 
+                  cp -r "${remdir}" "$localRepo"        
+                ;;
+    "dotfiles"  ) 
+                  for remfile in "$remdir"/*; do
+                    for locfile in "${localFiles_a[@]}"; do
+                      if [[ "${locfile##*/}" == "${remfile##*/}" ]]; then
+                        cat "$remfile" >> "$locfile"
+                      else
+                        cp "$remfile" "$localRepo"
+                      fi
+                    done
+                  done
+                ;;
+  esac
+done
+rm -rf "$tmp"
 
-  [ ! -d "$mydir" ] && mkdir "$mydir"
-  cd "$mydir"
-  #git clone https://github.com/jeanmichelcote/serverutils.git .
-  
-  for dir in ./*/; do
-    #dir="${dir%*/}"
-    printf "%s\n" $dir
-    #echo "${dir##*/}"
-  done
-
-  # find . -maxdepth 1 -mindepth 1 -type d -printf '%f\n'
-
-#  for f in $files; do
-#     echo "Processing $f file..."
-#  done
-
-  # cp dotfiles/* .
-}
-
-main
+# for file in "${localFiles_a[@]}"; do
+#   [[ -d $file ]]                && printf "%-10s %s\n" "Directory:" "$file"  && continue
+#   [[ ! "${file##*/}" =~ ^\. ]]  && printf "%-10s %s\n" "File:" "$file"       && continue
+#   [[ "${file##*/}" =~ ^\. ]]    && printf "%-10s %s\n" "Dotfile:" "$file"    && continue
+# done

@@ -754,6 +754,85 @@ getTotal() {
   printf "%'.2f\n" "$sum"
 } 
 
+# Gets all the hidden files or directories in current or selected path
+getdotfiles() {
+    local usage="Usage:\n
+                Accepts two (2) arguments.\n
+                \$1 = \"f\" for hidden files OR \"d\" for hidden directories\n
+                \$2 = Path to search. If no path is specified, current directory is used\n"
+    
+    [[ "$#" -gt 2 ]] || [[ "$1" =~ "-h" ]] && echo -e $usage && return 1 
+    
+    local typ=""  # f for files, d for directories
+    local dir=$(pwd)
+
+    case $# in
+        0)                                                    ;;
+        1)  [[ "$1" =~ [fd] ]] && typ="-type $1" || dir="$1"  ;;
+        2)  typ="-type $1" && dir="$2"                        ;;
+        *)  echo -e "$usage" && return 1                      ;;
+    esac
+
+    printf "%s\n" "$( find $dir -maxdepth 1 $typ -name '.*' -exec basename {} \; )"
+    unset usage typ dir
+}
+# getDotFiles() {
+# #    
+# #- Title            getDotFiles
+# #- Creation date    09-17-2015
+# #- Author           Jeanmichel Cote
+# #- Github           https://github.com/jeanmichelcote/scripts/.functions
+# #- Version          1.0
+# #- 
+# #
+# #: Usage:           getDotFiles [Options] <Arguments>
+# #:                  
+# #: Description:     Gets either all the hidden files, either all directories or fetch them all
+# #:                  in current or selected path 
+# #: 
+# #: [Options]:   
+# #:              -h  Prints out this usage block.
+# #:              -c  Prints out this function's credentials.
+# #:              -f  Gets hidden files
+# #:              -d  Gets hidden directory
+# #:                  No options prints out all hidden files and directories
+# #:              
+# #: <Arguments>: 
+# #:              $1  Path to search. If no path is specified, current directory is used"
+# #:  
+# #: (example):       getDotFiles -f
+# #: 
+# #
+# 
+#   while getopts ":hcfd" opt; do
+#     case $opt in
+#       h) printusage -H && return 0              ;;
+#       c) printusage -C && return 0              ;;
+#       f) totals=       
+#       ;;
+#       d)
+#       ;;
+#       *) printusage -H >&2 && return 1          ;;
+#     esac
+#   done
+#   shift $(( OPTIND - 1 ))
+# 
+#     [[ "$#" -gt 2 ]] || [[ "$1" =~ "-h" ]] && echo -e $usage && return 1 
+#     
+#     local typ=""  # f for files, d for directories
+#     local dir=$(pwd)
+# 
+#     case $# in
+#         0)                                                    ;;
+#         1)  [[ "$1" =~ [fd] ]] && typ="-type $1" || dir="$1"  ;;
+#         2)  typ="-type $1" && dir="$2"                        ;;
+#         *)  echo -e "$usage" && return 1                      ;;
+#     esac
+# 
+#     printf "%s\n" "$( find $dir -maxdepth 1 $typ -name '.*' -exec basename {} \; )"
+#     unset usage typ dir
+# }
+
 # Extract any kind of archived file
 #    cd "$2" 
 extract() {
@@ -847,28 +926,6 @@ decrypt() {
         read -s -p "Enter password:" pswd; echo
   openssl des3 -d -salt -in "${1}.des3" -out "${1}.${2}" -k "$pswd"
         unset pswd
-}
-# Gets all the hidden files or directories in current or selected path
-getdotfiles() {
-    local usage="Usage:\n
-                Accepts two (2) arguments.\n
-                \$1 = \"f\" for hidden files OR \"d\" for hidden directories\n
-                \$2 = Path to search. If no path is specified, current directory is used\n"
-    
-    [[ "$#" -gt 2 ]] || [[ "$1" =~ "-h" ]] && echo -e $usage && return 1 
-    
-    local typ=""  # f for files, d for directories
-    local dir=$(pwd)
-
-    case $# in
-        0)                                                    ;;
-        1)  [[ "$1" =~ [fd] ]] && typ="-type $1" || dir="$1"  ;;
-        2)  typ="-type $1" && dir="$2"                        ;;
-        *)  echo -e "$usage" && return 1                      ;;
-    esac
-
-    printf "%s\n" "$( find $dir -maxdepth 1 $typ -name '.*' -exec basename {} \; )"
-    unset usage typ dir
 }
 
 # animated gifs from any video

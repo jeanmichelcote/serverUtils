@@ -34,7 +34,7 @@ hitstoday() {
   --------------------------------------------------------------"
 
   [[ "$#" -gt 1 ]] && echo -e "$usage" && return 1
-  LOG=$( [[ ! -z "$*" ]] && echo "$1" || echo "$ACCESSLOG" )
+  LOG="${1:-ACCESSLOG}"
 
   awk -v pat="$today" '$0 ~ pat { n++ } END { print n, "visits today." }' "$LOG"
   grep "$today" "$LOG" | cut -d[ -f2 | cut -d] -f1 | awk -F: '{print "| "$2":00"}' | sort -n | uniq -c
@@ -56,7 +56,8 @@ hitsbyips() {
   If no argument is supplied, this function will query the defaugt log file.
  --------------------------------------------------------------"
   [[ "$#" -gt 1 ]] && echo -e "$usage" && return 1
-  LOG=$( [[ ! -z "$*" ]] && echo "$1" || echo "$ACCESSLOG" )
+  #LOG=$( [[ ! -z "$*" ]] && echo "$1" || echo "$ACCESSLOG" )
+  LOG="${1:-$ACCESSLOG}"
 
   awk -v pat="$today" '$0 ~ pat {ips[$1]++}
   END {
@@ -97,7 +98,7 @@ hitsbyhour() {
     esac
   fi
 
-  LOG=$( [[ ! -z "${2}" ]] && echo "${2}" || echo "${ACCESSLOG}")
+  LOG="${2:-$ACCESSLOG}"
 
   grep "${today}:${hr}" "$LOG" | cut -d[ -f2 | cut -d] -f1 | awk -F: '{print "| "$2":"$3}' | sort -nk1 -nk2 | uniq -c
   unset hr usage LOG
@@ -123,7 +124,7 @@ hitsbytime() {
     *                                      )  echo -e "${UND}The first argument needs to be in the format [hr:min], ex: 07:24${NC}" && return 1 ;;
   esac
 
-  LOG=$( [[ ! -z "$2" ]] && echo "$2" || echo "$ACCESSLOG" )
+  LOG="${2:-$ACCESSLOG}"
 
   grep "${today}:${theTime}" "$LOG" |
   awk '{ips[$1]++}
