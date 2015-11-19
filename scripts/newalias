@@ -46,7 +46,7 @@ grep -w "$name" "$dest" &>/dev/null 2>&1
 bail -v "This alias name is already in use. Please choose another one."
 
 sed '/## Utilities/ a\ 
-\alias '"$name"'="'"$cmnd"'"
+\alias '"$name"'='"$cmnd"'
 ' "${dest}" > "${dest}.new" && \
 mv "$dest" "${dest}.bak" && \
 mv "${dest}.new" "$dest" && \

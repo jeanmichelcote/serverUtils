@@ -55,5 +55,3 @@ source ~/.profile
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 [ -r /Users/jeanmichecote/.functions ] && [ -f /Users/jeanmichecote/.functions ] && source /Users/jeanmichecote/.functions
-[ -r /Users/jeanmichecote/~/tmp/.functions ] && [ -f /Users/jeanmichecote/~/tmp/.functions ] && source /Users/jeanmichecote/~/tmp/.functions
-[ -r /Users/jeanmichecote/tmp/.functions ] && [ -f /Users/jeanmichecote/tmp/.functions ] && source /Users/jeanmichecote/tmp/.functions

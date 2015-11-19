@@ -120,8 +120,8 @@ hitsbytime() {
   [[ "$#" -gt 2 ]] || [[ "$#" -eq 0 ]] && echo -e "$usage" && unset theTime usage && return 1
 
   case $1 in
-    [0-2][0-3]:[0-5][0-9]	           )  theTime="$1" ;;
-    *                                      )  echo -e "${UND}The first argument needs to be in the format [hr:min], ex: 07:24${NC}" && return 1 ;;
+    [0-2][0-3]:[0-5][0-9] )  theTime="$1" ;;
+    *                     )  echo -e "${UND}The first argument needs to be in the format [hr:min], ex: 07:24${NC}" && return 1 ;;
   esac
 
   LOG="${2:-$ACCESSLOG}"
