@@ -13,7 +13,7 @@
 shopt -s dotglob
 
 now=$(date +%d%m%Y%H%M%S)
-localRepo="${HOME}/tmp/test2"
+localRepo="${HOME}"
 tmp="${localRepo}/tmp"
 gitdir="https://github.com/jeanmichelcote/serverutils.git"
 
