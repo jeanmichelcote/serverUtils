@@ -18,8 +18,7 @@
 #: <Arguments>:     Accepts 1 arguments.
 #:              $1  Name of the new site 
 #: 
-#: (example):       newsite validate "Validates any entry against all 
-#:                  sorts of data types" -e email -t telephone -z zipcode
+#: (example):       newsite bombastic
 #:                 
 ############################################################################# 
                  

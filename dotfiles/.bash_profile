@@ -1,9 +1,6 @@
 # Add `~/bin` to the `$PATH`
 export PATH=$HOME/bin:$PATH
 
-# Add Passenger to the $PATH
-export PATH=$PATH:/Users/Jeanmichecote/.rvm/gems/ruby-1.9.3-p484@reRails2.3.15_/gems/passenger-4.0.37
-
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
@@ -15,7 +12,7 @@ unset file
 export PATH="$PATH":~/.node/bin
 
 # Init z
-source ~/dotfiles/z/z.sh
+source ~/z/z.sh
 
 # Init bsfl
 source "${HOME}/bin/bsfl"
@@ -52,6 +49,3 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 test -r /sw/bin/init.sh && . /sw/bin/init.sh
 
 source ~/.profile
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-[ -r /Users/jeanmichecote/.functions ] && [ -f /Users/jeanmichecote/.functions ] && source /Users/jeanmichecote/.functions
