@@ -12,7 +12,7 @@ unset file
 export PATH="$PATH":~/.node/bin
 
 # Init z
-source ~/z/z.sh
+source ~/bin/z.sh
 
 # Init bsfl
 source "${HOME}/bin/bsfl"
