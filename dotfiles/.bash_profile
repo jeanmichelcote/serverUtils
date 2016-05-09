@@ -12,7 +12,7 @@ unset file
 export PATH="$PATH":~/.node/bin
 
 # Init z
-source ~/z.sh
+source "${HOME}/z.sh"
 
 # Init bsfl
 source "${HOME}/bin/bsfl"
@@ -47,5 +47,3 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 [ -f /etc/bash_completion ] && source /etc/bash_completion
 
 test -r /sw/bin/init.sh && . /sw/bin/init.sh
-
-source ~/.profile
