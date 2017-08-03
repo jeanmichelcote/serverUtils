@@ -21,8 +21,6 @@ getStack() {
 }
 
 ini() {
-  source $HOME/bin/bsfl
-  source $HOME/bin/lib/dynArrayLib.sh
   shopt -s dotglob
 }
 
